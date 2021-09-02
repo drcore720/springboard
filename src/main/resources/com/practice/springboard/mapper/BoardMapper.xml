@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.practice.springboard.mapper.BoardMapper">
+    <select id="boardCount" resultType="int">
+        select count(boardId) as cnt
+        from tbl_board;
+    </select>
+
+    <select id="getList" resultType="com.practice.springboard.domain.Board">
+        select
+        *
+        from tbl_board;
+    </select>
+    <select id="getBoard" parameterType="Long" resultType="com.practice.springboard.domain.Board">
+    select * from tbl_board where boardId=#{boardId};
+    </select>
+    <insert id="uploadBoard" parameterType="com.practice.springboard.domain.Board">
+    insert into tbl_board(title, content, name)
+    values
+    (#{title},#{content},#{name});
+    </insert>
+    <update id="updateBoard" parameterType="com.practice.springboard.domain.Board">
+        update tbl_board
+        set title=#{title},content=#{content}
+    where boardId=#{boardId};
+    </update>
+    <delete id="deleteBoard" parameterType="com.practice.springboard.domain.Board">
+        delete tbl_board
+        where boardId=#{boardId};
+    </delete>
+</mapper>
